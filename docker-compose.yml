@@ -1,20 +1,9 @@
 version: "3.7"
 
 services:
-    with_ddos_prevention:
-        container_name: with_ddos_prevention
-        restart: always
+    apache:
+        image: 'bitnami/apache:latest'
         ports:
-            - 3000:3000
-        build:
-            context: ./with_ddos_prevention
-            dockerfile: Dockerfile
-    
-    without_ddos_prevention:
-        container_name: without_ddos_prevention
-        restart: always
-        ports:
-            - 4000:4000
-        build:
-            context: ./without_ddos_prevention
-            dockerfile: Dockerfile
+          - '8080:8080'
+        volumes:
+            - /root/TrabalhoMarcusLahr/static_files:/app
