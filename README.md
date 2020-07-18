@@ -23,6 +23,25 @@ gcc -o xerxes xerxes.c
 
 ## Protegendo o Apache
 
+```
+Using mod_qos
+The mod_qos module is a quality of service extension for the Apache HTTP Server. It implements control mechanisms that can assign different priorities to different HTTP requests. The following is an example of how to configure mod_qos to mitigate slow HTTP DoS attacks:
+
+<IfModule mod_qos.c>
+  # handle connections from up to 100000 different IPs
+  QS_ClientEntries 100000
+  # allow only 50 connections per IP
+  QS_SrvMaxConnPerIP 50
+  # limit the maximum number of active TCP connections to 256
+  MaxClients 256
+  # disables keep-alive when 180 (70%) TCP connections are occupied
+  QS_SrvMaxConnClose 180
+  # minimum request/response speed 
+  # (deny clients that keep connections open without requesting anything)
+  QS_SrvMinDataRate 150 1200
+</IfModule>
+```
+
     https://www.myrouter.com.br/protegendo-o-apache-contra-ataques-dos-e-slowloris/
 
 ---
@@ -31,19 +50,19 @@ gcc -o xerxes xerxes.c
 
 1- Faca um plano de resposta a incidente de DNS
 
-    - Faca um checklist com todos os seus dispositivos na rede e ferramentas de filtro de pacotes de rede e mantenha essa lista atualizada.
+   - Faca um checklist com todos os seus dispositivos na rede e ferramentas de filtro de pacotes de rede e mantenha essa lista atualizada.
 
-    - Monte um time de resposta para lidar com esse ataque e garantir que eles estejam treinados para a hora do ataque.
+   - Monte um time de resposta para lidar com esse ataque e garantir que eles estejam treinados para a hora do ataque.
 
-    - Mantenha comunicacao com clientes e com os fornecedores de servicos em cloud para saber exatamente o que esta acontecendo.
+   - Mantenha comunicacao com clientes e com os fornecedores de servicos em cloud para saber exatamente o que esta acontecendo.
 
 2- Monte uma Infraestrutura segura
 
-    Combine firewalls, VPN, anti-spam e filtro de conteudo, loadbalancers e outras camadas de protecao para DDoS, juntos eles permitem analise do trafego de rede e tambem a mitigacao desses ataques.
+   Combine firewalls, VPN, anti-spam e filtro de conteudo, loadbalancers e outras camadas de protecao para DDoS, juntos eles permitem analise do trafego de rede e tambem a mitigacao desses ataques.
 
 3- Monte uma Infraestrutura forte
 
-    O ideal e ter mais de um servidor para sua aplicacao, assim tendo redundancia e aumentando a disponibilidade do seu servico, especialmente se for em localizacoes geograficas diferentes.
+   O ideal e ter mais de um servidor para sua aplicacao, assim tendo redundancia e aumentando a disponibilidade do seu servico, especialmente se for em localizacoes geograficas diferentes.
 
 
 
