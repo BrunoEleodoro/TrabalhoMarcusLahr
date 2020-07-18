@@ -43,7 +43,7 @@ The mod_qos module is a quality of service extension for the Apache HTTP Server.
 ```
 
     https://www.myrouter.com.br/protegendo-o-apache-contra-ataques-dos-e-slowloris/
-
+    https://www.acunetix.com/blog/articles/slow-http-dos-attacks-mitigate-apache-http-server/
 ---
 
 ## Formas de se prevenir contra ataques DDOS:
